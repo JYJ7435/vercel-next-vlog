@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://vercel-next-vlog.vercel.app/
+
+# Sitemaps
+Sitemap: https://vercel-next-vlog.vercel.app/sitemap.xml
