@@ -1,4 +1,3 @@
-import Layout from 'components/Layout';
 import Head from 'next/head';
 import Link from 'next/link';
 import React, { useRef, useState } from 'react';
@@ -41,7 +40,7 @@ export default function Write() {
         }
     };
     return (
-        <Layout>
+        <>
             <Head>
                 <title>Post Write..</title>
             </Head>
@@ -56,6 +55,7 @@ export default function Write() {
                         ref={idRef}
                     />
                     <br />
+                    <br />
                     <input
                         type="text"
                         name="title"
@@ -63,6 +63,7 @@ export default function Write() {
                         required
                         ref={titleRef}
                     />
+                    <br />
                     <br />
                     <textarea
                         type="text"
@@ -72,7 +73,10 @@ export default function Write() {
                         ref={contentRef}
                     />
                     <br />
-                    <button type="submit">Submit</button>
+                    <br />
+                    <button className="rounded bg-pink-500 px-2" type="submit">
+                        Submit
+                    </button>
                 </form>
                 {showContent && (
                     <Link href={`/posts/${idRef.current.value}`}>
@@ -80,6 +84,6 @@ export default function Write() {
                     </Link>
                 )}
             </article>
-        </Layout>
+        </>
     );
 }

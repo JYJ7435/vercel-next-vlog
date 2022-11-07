@@ -1,6 +1,5 @@
-import Layout from 'components/Layout';
 import Head from 'next/head';
-import React from 'react';
+import React, { useState } from 'react';
 import { getPostData, getAllPostIds } from 'lib/posts';
 import Date from 'components/Date';
 import utilStyles from '/styles/utils.module.css';
@@ -9,8 +8,9 @@ import CodeBlock from 'components/CodeBlock';
 import { useRouter } from 'next/router';
 // import Button from '../../components/Button';
 import dynamic from 'next/dynamic';
+import { siteTitle } from 'pages/_document';
 
-const Button = dynamic(() => import('../../components/Button'), {
+const Button = dynamic(() => import('components/Button'), {
     loading: () => <div>Loading...</div>,
 });
 
@@ -44,18 +44,35 @@ const components = {
     CodeBlock,
 };
 
-function Post({ postData }) {
+const ErrorComponent = () => {
+    const [error, setError] = useState(false);
+    if (error) {
+        throw new Error('Error occured');
+    }
+    const onClickHandler = () => {
+        setError(true);
+    };
+    return (
+        <button className="rounded px-2 bg-green-500" onClick={onClickHandler}>
+            Error
+        </button>
+    );
+};
+
+function Post({ postData, pathname }) {
     const router = useRouter();
 
     if (router.isFallback) {
         return <div>Loading...</div>;
     }
     return (
-        <Layout>
+        <>
             <Head>
-                <title>{postData.title}</title>
+                <title>{`${postData.title} - ${siteTitle}`}</title>
             </Head>
+            <ErrorComponent />
             <article>
+                <span>pathname: {pathname}</span>
                 <h1 className={utilStyles.headingXl}>{postData.title}</h1>
                 <div className={utilStyles.lightText}>
                     <Date dateString={postData.date} />
@@ -74,7 +91,7 @@ function Post({ postData }) {
                     />
                 )}
             </article>
-        </Layout>
+        </>
     );
 }
 

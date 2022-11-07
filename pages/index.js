@@ -1,5 +1,5 @@
 import { getSortedPostsData } from 'lib/posts';
-import Layout, { siteTitle } from 'components/Layout';
+import { siteTitle } from './_document';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -49,7 +49,7 @@ export default function Home({ allPostsData }) {
     //         .then((data) => setAllPostsData(data.allPostsData));
     // }, []);
     return (
-        <Layout home>
+        <>
             <Head>
                 <title>{siteTitle}</title>
             </Head>
@@ -90,6 +90,6 @@ export default function Home({ allPostsData }) {
                     </span>
                 </a>
             </footer>
-        </Layout>
+        </>
     );
 }
