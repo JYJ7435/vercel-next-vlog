@@ -1,6 +1,13 @@
+/* eslint-disable no-undef */
 import Head from 'next/head';
 import Link from 'next/link';
 import React, { useRef, useState } from 'react';
+import getConfig from 'next/config';
+
+const { serverRuntimeConfig, publicRuntimeConfig } = getConfig();
+
+console.log(serverRuntimeConfig.mySecret);
+console.log(publicRuntimeConfig.staticFolder);
 
 export default function Write() {
     const idRef = useRef();
@@ -45,7 +52,7 @@ export default function Write() {
                 <title>Post Write..</title>
             </Head>
             <article>
-                <h1>Write a Post!!</h1>
+                <h1>Write a Post!! {process.env.customKey}</h1>
                 <form onSubmit={handleSubmit}>
                     <input
                         type="text"
